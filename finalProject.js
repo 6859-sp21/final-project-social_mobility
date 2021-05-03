@@ -89,7 +89,7 @@ const generateMap = (stateData, mobilityData) => {
 
     // console.log(stateData)
     var projection = d3.geoAlbersUsa()
-                        .translate([width/2, height/2])
+                        .translate([width/4, height/2])
                         .scale([1000])
     
     var path = d3.geoPath()
@@ -158,11 +158,11 @@ const generateMap = (stateData, mobilityData) => {
             let blue  = ["christa", "jebi", 'mbrim']
 
             
-            collegeTable.selectAll('div')
-                .data(blue)
-                .enter()
-                .append('div')
-                .text('blah')
+            // collegeTable.selectAll('div')
+            //     .data(blue)
+            //     .enter()
+            //     .append('div')
+            //     .text('blah)
 
 
        })
