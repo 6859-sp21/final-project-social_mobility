@@ -89,7 +89,7 @@ const generateMap = (stateData, mobilityData) => {
 
     // console.log(stateData)
     var projection = d3.geoAlbersUsa()
-                        .translate([width/3, height/5])
+                        .translate([width/2, height/2])
                         .scale([1000])
     
     var path = d3.geoPath()
