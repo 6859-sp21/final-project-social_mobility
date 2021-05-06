@@ -89,7 +89,7 @@ const generateMap = (stateData, mobilityData) => {
 
     // console.log(stateData)
     var projection = d3.geoAlbersUsa()
-                        .translate([width/3, height/5])
+                        // .translate([width/3, height/5])
                         .scale([1000])
     
     var path = d3.geoPath()
@@ -133,7 +133,7 @@ const generateMap = (stateData, mobilityData) => {
     //    .style("fill", "rgb(213,222,217)") //this one will change
        .on("mouseover", function(e, d) {
             
-
+            
             
             // console.log(d.properties.name)
                            
@@ -173,6 +173,11 @@ const generateMap = (stateData, mobilityData) => {
        
 }
 
+
+//Load external data and boot 
+// Need to come back to this and figure out how the defer function works
+// d3.queue()
+//     .defer(d)
 
 
 
