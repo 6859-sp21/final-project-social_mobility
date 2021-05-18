@@ -10,12 +10,14 @@
     <script src="https://d3js.org/d3-geo.v2.min.js"></script>
     <script src="https://d3js.org/topojson.v2.min.js"></script>
 
+    <!-- Load Jquery UI css to style autocomplete correctly -->
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
     <!-- Load bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
-    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" 
-    crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <link rel="stylesheet" href="finalProject.css">
+       
 </head>
 
 <body>
@@ -42,65 +44,95 @@
             </collegeTable>
         </tooltip>
     </div>
-    <script src="finalProject.js"></script>
+    
 
     <!-- -----------------------Scatter Plot ------------------------------------>
 
-    <h2>Social Mobility Rates by College</h2>
+    <h1 style="text-align: center;">Social Mobility by College</h1>    
     <br>
     
-    <!-- College Name Search -->
     <div class="row">
-        <div class="col-4">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search College" aria-label="Search College">
+        <div class="col">
+            <!-- College Name Search -->
+            <div class="row">
+                <div class="col-8">
+                    <div class="input-group">
+                        <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
+                    </div>
+                </div>
+
+                <div class="col-4">
+                    <button type="button" class="btn btn-outline-primary" id='search'>Search</button> 
+                    <button type="button" class="btn btn-outline-primary" id='show'style="display:none">Show Actual</button>
+                    <button type="button" class="btn btn-outline-dark" id='clear' style="display:none">Clear</button> 
+                </div>
+            </div>
+
+            <br>
+            <div id="scatterChart">
+                <!-- Parent and Kid Median Income Scatter Plot -->
             </div>
         </div>
-
+            
         <div class="col">
-            <button type="button" class="btn btn-outline-dark" id='redraw'>Redraw</button> 
-            <button type="button" class="btn btn-outline-primary">Show Actual</button>
+            <h4>Family income VS. student income at age 34</h4>
+            <br>
+            <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
+            <h5 id="scatterText"></h5>
         </div>
     </div>
 
+    <!-- People chart -->
+    <div class="row mt-5">
+        <div class="col">
+            <div style="text-align: center;" id="peopleChart">
+            </div>
+        </div>
+            
+        <div class="col">
+            <h4 id="peopleText"></h4>
+        </div>
+    </div>
+    
+    <!-- Load JQuery UI from Google's server to increase speed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap Javascript -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- Visulization -->
+    <script src="finalProject.js"></script>
+    <script src="scatterplot.js"> </script>
+
     <!-- College Tier Filter -->
-    <div class="row mt-4">
+    <!-- <div class="row mt-4">
         <div class="col">
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   Select College Tier
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Ivy Plus</a>
-                  <a class="dropdown-item" href="#">Other elite schools</a>
-                  <a class="dropdown-item" href="#">Highly selective public</a>
-                  <a class="dropdown-item" href="#">Highly selective private</a>
+                  <button type="button" class="dropdown-item btn btn-link">Ivy Plus</button>
+                  <button type="button" class="dropdown-item btn btn-link">Other elite schools</button>
+                  <button type="button" class="dropdown-item btn btn-link">Highly selective public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Highly selective private</button>
+                  <button type="button" class="dropdown-item btn btn-link">Selective public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Selective private</button>
+                  <button type="button" class="dropdown-item btn btn-link">Nonselective 4-year public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Nonselective 4-year private not-for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Two-year (public and private not-for-profit)</button>
+                  <button type="button" class="dropdown-item btn btn-link">Four-year for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Two-year for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Less than two year schools of any type</button>
+                  <button type="button" class="dropdown-item btn btn-link">Attending college with insufficient data</button>
+                  <button type="button" class="dropdown-item btn btn-link">Not in college between the ages of 19-22</button>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <br>
-    
-    <div class="row">
-        <div clas="col-8">
-            <div id="chart" style="width:820px; height:620px;">
-                <!-- Parent and Kid Median Income Scatter Plot -->
-            </div>
-        </div>
-            
-        <div clas="col-4">
-            <img src="https://raw.githubusercontent.com/6859-sp21/final-project-social_mobility/main/barchart_static.jpg">
-        </div>
-    </div>
-    
-
-    <script src="scatterplot.js"> </script>
-
-    <!-- Bootstrap Javascript -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    </div> -->
 
 </body>
 </html>
