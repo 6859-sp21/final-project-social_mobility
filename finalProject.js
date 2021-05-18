@@ -1,4 +1,3 @@
-
 const body = d3.select("body").node()
 // var map = d3.select("map").node()
 var width  = window.innerWidth

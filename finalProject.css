@@ -87,3 +87,7 @@ li.key {
     display: flex ;
     width: 50%;
 }
+
+.card {
+    height: fit-content;
+}
