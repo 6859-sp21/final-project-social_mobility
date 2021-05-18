@@ -41,6 +41,13 @@ const isMobilityRateNotNan = (x) => {
     return x[mobilityRate] !== ""
 }
 
+// const getStateFeatures = (stateData, stateName) => {
+    
+//     console.log(stateData.features.filter(x => x.properties.name == stateName))
+    
+//     return stateData.features.filter(x => x.properties.name == stateName)
+// }
+
 const getCollegeMobilityRates = (mobilityData, abbr) => {
         let filtered = mobilityData.filter( x => x.state === abbr)
 
@@ -60,14 +67,14 @@ const getCollegeMobilityRates = (mobilityData, abbr) => {
 
 const generateMap = (stateData, mobilityData) => {
 
-    console.log(getMinMaxStateAverage(mobilityData))
+    // console.log(getMinMaxStateAverage(mobilityData))
 
     var colorScale = d3.scaleLinear()
                         .range(["#D4EEFF", "#0099FF"])
                         .interpolate(d3.interpolateLab)
                         .domain(getMinMaxStateAverage(mobilityData))
 
-    console.log(d3.extent(mobilityData, (d) => { return parseFloat(d[mobilityRate])}))
+    // console.log(d3.extent(mobilityData, (d) => { return parseFloat(d[mobilityRate])}))
 
     const getColor = (d) => {
         let stateName = d.properties.name
@@ -81,8 +88,6 @@ const generateMap = (stateData, mobilityData) => {
 
         let stateAverage = d3.mean(stateMobilityData)
 
-        // console.log(stateAverage)
-        
         return colorScale(stateAverage)
 
     }
@@ -106,7 +111,7 @@ const generateMap = (stateData, mobilityData) => {
                     .attr("class", "tooltip")
                     .style("visibility", "hidden")
     
-    const stateNameHtml = d3.select("state")
+    const stateNameHtml = d3.select("stateTitle")
 
     const stats = d3.select("stats")
     
@@ -133,16 +138,14 @@ const generateMap = (stateData, mobilityData) => {
     //    .style("fill", "rgb(213,222,217)") //this one will change
        .on("mouseover", function(e, d) {
             
-            
-            
             // console.log(d.properties.name)
                            
        })
        .on("click", function(e, d) {
-           // apply a different color to the selected state
-            d3.select(".state-selected").classed("state-selected", false)    
+        //    // apply a different color to the selected state
+        //     d3.select(".state-selected").classed("state-selected", false)    
 
-            d3.select(this).classed('state-selected', true) 
+        //     d3.select(this).classed('state-selected', true) 
 
             let stateName = d.properties.name
             let abbr = stateNameToAbbr[stateName]
@@ -158,16 +161,72 @@ const generateMap = (stateData, mobilityData) => {
             let blue  = ["christa", "jebi", 'mbrim']
 
             
-            collegeTable.selectAll('div')
-                .data(blue)
-                .enter()
-                .append('div')
-                .text('blah')
+            let stateFeatures = stateData.features.filter(x => x.properties.name == stateName)
+            stateSelected(stateFeatures)
+            // console.log(stateFeatures)
+            // collegeTable.selectAll('div')
+            //     .data(blue)
+            //     .enter()
+            //     .append('div')
+            //     .text('blah)
 
+            // console.log(d3.select(this).node())
+            // stateSelected(stateName)
+            // console.log(getStateFeatures(stateData, stateName))
 
        })
 
-    function stateSelected(stateName) {
+    //    svg.append("g")
+    //      .attr("class", "legendLinear")
+    //      .attr("transform", "translate(20,20)");
+   
+    //    var legendLinear = d3.legend.color()
+    //      .shapeWidth(30)
+    //      .orient('horizontal')
+    //      .scale(linear);
+   
+    //    svg.select(".legendLinear")
+    //      .call(legendLinear);
+       
+
+    function stateSelected(stateFeatures) {
+
+        // let stateFeatures = getStateFeatures(stateData, stateName)
+
+        // console.log(stateFeatures)
+
+        // console.log(stateData)
+        var stateProjection = d3.geoAlbersUsa()
+                            // .translate([width/3, height/5])
+                                .scale([1000])
+        
+        var statePath = d3.geoPath()
+                        .projection(stateProjection)
+    
+    
+        var stateSvg = d3.select("stateMap")
+                            .append("svg")
+                            .attr("width", width)
+                            .attr("height", height)
+
+        
+
+
+
+        var state = stateSvg.select("statePath")
+                        .data(stateFeatures)
+                        .enter()
+                        .append("path")
+                        .attr("d", statePath)
+                        .style("stroke", "#fff")
+                        .style("stroke-width", "0.5")
+                        .attr("fill", function(d, i) {
+
+                            console.log(d3.select(this).node())
+                            return getColor(d)
+                        })
+            
+        // console.log(getStateFeatures(stateData, stateName))
 
     }
        
@@ -179,22 +238,37 @@ const generateMap = (stateData, mobilityData) => {
 // d3.queue()
 //     .defer(d)
 
-
-
-
-
-//Load GeoJSON data 
-(async () => {
-    usStates = await d3.json(usStatesFile).then(usStates => usStates) //doesn't feel like US states is a descriptive enough variable
-
-    mobilityData = await d3.csv(mobilityDataFile).then(mobilityData => mobilityData) 
-    //will do some filtering of the data here
+function load(error, usStates, mobilityData) {
+    if (error) throw error
 
     let year = 1980
     let filteredData = mobilityData.filter( (x) => x.cohort == year)
 
     console.log(filteredData)
-    // console.log(mobilityData.filter(x => x.state === 'NY'))
+
+    generateMap(usStates, filteredData)
+
+}
+
+
+// d3.queue()
+//     .defer(d3.json, usStatesFile)
+//     .defer(d3.csv, mobilityDataFile)
+//     .await(load)
+
+
+
+//Load GeoJSON data 
+(async () => {
+    usStates = await d3.json(usStatesFile).then(usStates => usStates) 
+
+    mobilityData = await d3.csv(mobilityDataFile).then(mobilityData => mobilityData) 
+
+    let year = 1980
+    let filteredData = mobilityData.filter( (x) => x.cohort == year)
+
+    console.log(filteredData)
+
     generateMap(usStates, filteredData)
 
 })()

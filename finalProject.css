@@ -1,10 +1,13 @@
 body {
     font-family: "Open Sans", sans-serif;
-    display: grid;
-    grid-template-rows: 20% 80%;
+    /* display: grid;
+    grid-template-rows: 20% 80%; */
     /* font-size: 16px; */
-    /* padding: 40px; */
+    padding: 40px;
 
+}
+.page {
+    height: 100vh;
 }
 .page-body{
     display: grid;
@@ -26,7 +29,7 @@ h1 {
     color: #0099FF !important;
 }
 
-state {
+stateTitle {
     font-size: 3em;
     font-weight: 700;
     color: #0099FF
@@ -66,3 +69,21 @@ div.tooltip_scatter {
     border-radius: 8px;
     pointer-events: none;
   }
+
+  #legend {
+    padding: 1.5em 0 0 1.5em;
+}
+
+li.key {
+    border-top-width: 10px;
+    border-top-style: solid;
+    font-size: .75em;
+    width: 10%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.list-inline {
+    display: flex ;
+    width: 50%;
+}

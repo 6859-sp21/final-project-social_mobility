@@ -7,8 +7,15 @@
     <!-- Load d3 -->
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://d3js.org/d3-array.v2.min.js"></script>
-    <script src="https://d3js.org/d3-geo.v2.min.js"></script>
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script> 
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script>   -->
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://unpkg.com/rbush@1.4.3/rbush.js"></script>
+    <script src="https://unpkg.com/spamjs@1.1.0/spam.min.js"></script>
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Load bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
@@ -19,193 +26,156 @@
 </head>
 
 <body>
-    <header>
-        <h1>Social Mobility Rates by State</h1>
-    </header>
-    <div class="page-body">
-        <map>
-        </map>
-        <tooltip>
-            <state>
-            </state>
-            <stats>
-            </stats>
-            <collegeTable>
-            </collegeTable>
-        </tooltip>
+    <div class='page'>
+        <header>
+            <div style="width: 1400px">
+                <h1>Social Mobility in the United States</h1>
+                <h5>How does college education impact social mobility in the US? 
+                    We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                    which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
+            </div>
+        </header>
+
+        <br>
+        <h2>Social Mobility Rates by State</h2>
+        <div class="page-body">
+            <map>
+            </map>
+            <tooltip>
+                <stateTitle>
+                </stateTitle>
+                <stats>
+                </stats>
+                <stateMap>
+                </stateMap>
+                <collegeTable>
+                </collegeTable>
+            </tooltip>
+        </div>
     </div>
+
     <script src="finalProject.js"></script>
 
+    <div class='page'>
+        <div class='page-body'>
+            <div class='neighborhood-map-holder'>
+                <div id="legend"></div>
+                <neighborhood_map>
 
-    <h1>Social Mobility Rates by College</h1>
-    <br>
-    
-    <!-- College Name Search -->
-    <div class="row">
-        <div class="col-4">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Search College" aria-label="Search College">
+                </neighborhood_map>
             </div>
-        </div>
-
-        <div class="col">
-            <button type="button" class="btn btn-outline-dark" id='redraw'>Redraw</button> 
-            <button type="button" class="btn btn-outline-primary">Show Actual</button>
-        </div>
-    </div>
-
-    <!-- College Tier Filter -->
-    <div class="row mt-4">
-        <div class="col">
-            <div class="dropdown">
-                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Select College Tier
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="#">Ivy Plus</a>
-                  <a class="dropdown-item" href="#">Other elite schools</a>
-                  <a class="dropdown-item" href="#">Highly selective public</a>
-                  <a class="dropdown-item" href="#">Highly selective private</a>
+            
+            <div class="card">
+                <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
+                <div class="card-body">
+                    <div>
+                        CHILD RACE
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            All Races
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            White
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Hispanic
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Black
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Asian
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            American Indian
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+
     </div>
     
-    <br>
+    <script src="neighborhood.js"></script>
 
-    <div id="chart" style="width:820px; height:620px;">
-        <!-- Parent and Kid Median Income Scatter Plot -->
+
+
+    <!-- -----------------------Scatter Plot ------------------------------------>
+    <div class='page'>
+        <h2>Social Mobility Rates by College</h2>
+        <br>
+        
+        <!-- College Name Search -->
+        <div class="row">
+            <div class="col-4">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search College" aria-label="Search College">
+                </div>
+            </div>
+
+            <div class="col">
+                <button type="button" class="btn btn-outline-dark" id='redraw'>Redraw</button> 
+                <button type="button" class="btn btn-outline-primary">Show Actual</button>
+            </div>
+        </div>
+
+        <!-- College Tier Filter -->
+        <div class="row mt-4">
+            <div class="col">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Select College Tier
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item" href="#">Ivy Plus</a>
+                    <a class="dropdown-item" href="#">Other elite schools</a>
+                    <a class="dropdown-item" href="#">Highly selective public</a>
+                    <a class="dropdown-item" href="#">Highly selective private</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <br>
+        
+        <div class="row">
+            <div clas="col-8">
+                <div id="chart" style="width:820px; height:620px;">
+                    <!-- Parent and Kid Median Income Scatter Plot -->
+                </div>
+            </div>
+                
+            <div clas="col-4">
+                <img src="https://raw.githubusercontent.com/6859-sp21/final-project-social_mobility/main/barchart_static.jpg">
+            </div>
+        </div>
+        
+
+        <script src="scatterplot.js"> </script>
+
+        <!-- Bootstrap Javascript -->
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        
     </div>
-
-    <script>    
-        let redraw = d3.select('#redraw');
-    
-        d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobility/main/data/joint_table1_2.csv").then(function(college) {
-            
-            college.forEach(function(d) {
-                    d.k_median = +d.k_median;
-                    d.par_median = +d.par_median;
-                    d.tier = +d.tier;
-                });
-
-            // Debug
-            console.log(college);
-
-            // 2. Setting up variables that describe our chart's space.
-            const height = 600;
-            const width = 800;;
-            const margin = ({top: 10, right: 20, bottom: 20, left: 40});
-
-            // 3. Create a SVG we will use to make our chart.
-            // See https://developer.mozilla.org/en-US/docs/Web/SVG for more on SVGs.
-            const svg = d3.create('svg')
-            .attr('width', width)
-            .attr('height', height);
-
-            // 4. Setting up scales.
-            const xScale = d3.scaleLinear()
-            .domain([0, d3.max(college, d => d.par_median)])
-            .range([margin.left, width - margin.right])
-            .nice();
-
-            const yScale = d3.scaleLinear()
-            .domain([0, d3.max(college, d => d.k_median)])
-            .range([height - margin.bottom, margin.top])
-            .nice();
-
-            const colorScale = d3.scaleOrdinal()
-            .domain(college.map(d => d.tier))
-            .range(d3.schemeBlues[9]);
-
-            var tooltip = d3.select("body").append("div")
-            .attr("class", "tooltip_scatter")
-            .style("opacity", 0);
-
-            // 5. Drawing our points
-            // See symbol docs https://github.com/d3/d3-shape/blob/v2.1.0/README.md#symbol
-            const symbol = d3.symbol();
-            svg.append('g')
-            .selectAll('path') // d3-shape functions (like d3.symbol) generate attributes for SVG <path> elements
-            .data(college)
-            .join('path')
-            .attr('transform', d => `translate(${xScale(d.par_median)}, ${yScale(d.k_median)})`)
-            .attr('fill', d => colorScale(d.tier))
-            .attr('d', d => symbol()) // Notice, the output of the d3.symbol is wired up to the "d" attribute.
-            .on("mouseover", function(event, d) {
-                tooltip.transition()
-                .duration(200)
-                .style("opacity", .9);
-                tooltip.html("<b>" + d.name + "</b>" + "<br/> Tier: " + d.tier_name + "<br/> Median Family Income: " + d.par_median + "<br/> Median Individual Income: " + d.k_median)
-                .style("left", (event.pageX) + "px")
-                .style("background", colorScale(d.tier))
-                .style("top", (event.pageY - 28) + "px");
-
-                d3.select(this)
-                    .attr("fill", "black")
-                    .attr("d", symbol.size(64 * 4));
-                })
-            .on("mouseout", function(event, d) {
-                tooltip.transition()
-                .duration(500)
-                .style("opacity", 0);
-
-                d3.select(this)
-                    .attr("fill", colorScale(d.tier))
-                    .attr("d", symbol.size(64))
-                });
-
-            // Click to draw
-            let drawing = svg.append("circle")
-            svg.on("click", function(event){
-                var mouse = d3.pointer(event);
-                console.log(mouse);
-                    drawing
-                    .attr("cx", mouse[0])
-                    .attr("cy", mouse[1])
-                    .attr("fill", "red")
-                    .attr('r', 6)
-            });
-
-            // Clear drawing
-            redraw.on('click', () => {
-                drawing.remove();
-                drawing = svg.append("circle");
-            })
-
-            //6. Drawing our x-axis
-            svg.append('g')
-            .attr('transform', `translate(0, ${height - margin.bottom})`)
-            .call(d3.axisBottom(xScale))
-            // Add x-axis title 'text' element.
-            .append('text')
-            .attr('text-anchor', 'end')
-            .attr('fill', 'black')
-            .attr('font-size', '12px')
-            .attr('font-weight', 'bold')
-            .attr('x', width - margin.right)
-            .attr('y', -10)
-            .text('Median Family Income');
-
-            //7. Drawing our y-axis
-            svg.append('g')
-            .attr('transform', `translate(${margin.left}, 0)`)
-            .call(d3.axisLeft(yScale))
-            // Add y-axis title 'text' element.
-            .append('text')
-                .attr('transform', `translate(20, ${margin.top}) rotate(-90)`)
-                .attr('text-anchor', 'end')
-                .attr('fill', 'black')
-                .attr('font-size', '12px')
-                .attr('font-weight', 'bold')
-                .text('Median Individual Income');
-
-            document.getElementById("chart").appendChild(svg.node());
-        });
-    </script>
-
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
 </body>
 </html>
