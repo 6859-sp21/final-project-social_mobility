@@ -118,10 +118,10 @@
     <br>
     
     <div class="row">
-        <div class="col">
+        <div class="col-6">
             <!-- College Name Search -->
             <div class="row">
-                <div class="col-8">
+                <div class="col">
                     <div class="input-group">
                         <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
                     </div>
@@ -139,34 +139,35 @@
                 <!-- Parent and Kid Median Income Scatter Plot -->
             </div>
         </div>
-            
+
+        <div class="col-1">
+        </div>
+        
+        <!-- People chart -->
+        <div class="col-4">
+            <h3>Family income VS. student income at age 34</h3>
+            <br>
+            <h5 id="scatterText"></h5>
+            <div style="padding-top: 20px;" id="peopleChart"></div>
+            <br>
+            <h5 id="peopleText"></h5>            
+        </div>
+
+        <div class="col-1">
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col">
-            <h4>Family income VS. student income at age 34</h4>
             <br>
             <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
-            <h5 id="scatterText"></h5>
+        </div>
+        <div class="col">
         </div>
     </div>
     
     <script src="neighborhood.js"></script>
 
-    <!-- People chart -->
-    <div class="row mt-5">
-        <div class="col">
-            <div style="text-align: center;" id="peopleChart">
-            </div>
-        </div>
-            
-        <div class="col">
-            <h4>How many college students who came from a poor family became rich adults?</h4>
-            <br>
-            <h4 id="peopleText"></h4>
-        </div>
-    </div>
-
-    <div style="text-align: center;" id="testChart">
-    </div>
-    
     <!-- Load JQuery UI from Google's server to increase speed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
@@ -177,7 +178,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
     <!-- Visulization -->
-    <script src="finalProject.js"></script>
     <script src="scatterplot.js"> </script>
 
     <!-- College Tier Filter -->
