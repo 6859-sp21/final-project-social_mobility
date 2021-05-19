@@ -32,18 +32,21 @@
 
 <body>
     <div class='page'>
-        <header>
-            <div style="width: 1400px">
-                <h1 data-aos="fade-in" data-aos-duration="1000">Social Mobility in the United States</h1>
-                <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">How does college education impact social mobility in the US? 
+        <header style="background-color:black;">
+            <div class = "section-body" style="width: 1400px; padding-top: 200px; padding-bottom: 500px;">
+                <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300" style="color: white !important;">College Education and Social Mobility in the United States</h1>
+                <br>
+                <br>
+                <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600" style="color: rgb(204, 204, 204) !important;">How does college education impact social mobility in the US? 
                     We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
                     which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
             </div>
         </header>
 
         <br>
-        <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
+        
         <div class="page-body" data-aos="fade-in">
+            <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
             <map>
             </map>
             <tooltip>
@@ -119,58 +122,66 @@
     </div>
 
     
-    <h1 data-aos="fade-in" style="text-align: center;">Social Mobility by College</h1>    
-    <br>
-    
-    <div class="row">
-        <div class="col-6">
-            <!-- College Name Search -->
-            <div class="row" data-aos="fade-in">
-                <div class="col">
-                    <div class="input-group">
-                        <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
+<div class="container-fluid" id="section3" style="background-color: #f8feff; padding-top: 6rem; padding-bottom: 3rem;">
+    <div class="section-body">
+        <div class="row" style="padding-bottom: 3rem;">
+            <h2 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100" >Social Mobility by College</h2> 
+        </div>   
+
+        <div class="row">
+            <div class="col-6">
+                <!-- College Name Search -->
+                <div class="row" data-aos="fade-in" data-aos-delay="300" >
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-primary" id='search'>Search</button> 
+                        <button type="button" class="btn btn-outline-primary" id='show'style="display:none">Show Actual</button>
+                        <button type="button" class="btn btn-outline-dark" id='clear' style="display:none">Clear</button> 
                     </div>
                 </div>
 
-                <div class="col-4">
-                    <button type="button" class="btn btn-outline-primary" id='search'>Search</button> 
-                    <button type="button" class="btn btn-outline-primary" id='show'style="display:none">Show Actual</button>
-                    <button type="button" class="btn btn-outline-dark" id='clear' style="display:none">Clear</button> 
+                <br>
+                <div id="scatterChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- Parent and Kid Median Income Scatter Plot -->
                 </div>
             </div>
 
-            <br>
-            <div id="scatterChart" data-aos="fade-in">
-                <!-- Parent and Kid Median Income Scatter Plot -->
+            <div class="col-1">
+            </div>
+            
+            <!-- People chart -->
+            <div class="col-4">
+                <h3 data-aos="fade-in" data-aos-delay="300">Family income VS. student income at age 34</h3>
+                <br>
+                <h5 id="scatterText" data-aos="fade-in" data-aos-delay="300"></h5>
+                <div style="padding-top: 20px;" id="peopleChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- People chart -->
+                </div>
+                <br>
+                <h5 id="peopleText" data-aos="fade-in" data-aos-delay="800"></h5>            
+            </div>
+
+            <div class="col-1">
             </div>
         </div>
 
-        <div class="col-1">
+        <div class="row" data-aos="fade-in" data-aos-delay="600">
+            <div class="col">
+                <br>
+                <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
+            </div>
+            <div class="col">
+            </div>
         </div>
         
-        <!-- People chart -->
-        <div class="col-4">
-            <h3 data-aos="fade-in">Family income VS. student income at age 34</h3>
-            <br>
-            <h5 id="scatterText" data-aos="fade-in"></h5>
-            <div style="padding-top: 20px;" id="peopleChart" data-aos="fade-in"></div>
-            <br>
-            <h5 id="peopleText" data-aos="fade-in"></h5>            
-        </div>
-
-        <div class="col-1">
-        </div>
     </div>
+</main>
 
-    <div class="row" data-aos="fade-in">
-        <div class="col">
-            <br>
-            <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
-        </div>
-        <div class="col">
-        </div>
-    </div>
-    
     <script src="neighborhood.js"></script>
 
     <!-- Load JQuery UI from Google's server to increase speed -->
