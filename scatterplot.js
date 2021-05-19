@@ -7,6 +7,25 @@ let isDrawing = false;
 let showClicked = false;
 let clusterClicked = false;
 
+var chartColors = {
+    1: "#03045e",
+    2: "#023E8A",
+    3: "#024D95",
+    4: "#015BA0",
+    5: "#0169AB",
+    6: "#0077B6",
+    7: "#0087BF",
+    8: "#0096C7",
+    9: "#00A5D0",
+    10: "#00B4D8",
+    11: "#24BFDE",
+    12: "#48CAE4",
+    13: "#6CD5EA",
+    14: "#ADE8F4"
+}
+
+var bgColor = "#f8feff";
+var highlight = "#D1322A";
 
 d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobility/main/data/joint_table1_2.csv").then(function(rawScatter) {
     
@@ -32,7 +51,6 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
             allPar.push(d.par_median);
             allK.push(d.k_median);
         });
-
     
     const avgPar = Math.round((allPar.reduce((a,b) => a + b, 0) / allPar.length));
     const avgK = Math.round((allK.reduce((a,b) => a + b, 0) / allK.length));
@@ -156,9 +174,9 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
     .range([height - margin.bottom, margin.top])
     .nice();
 
-    const colorScale = d3.scaleOrdinal()
-    .domain(rawScatter.map(d => d.tier))
-    .range(d3.schemeBlues[9]);
+    // const colorScale = d3.scaleOrdinal()
+    // .domain(rawScatter.map(d => d.tier))
+    // .range(d3.schemeBlues[9]);
 
     var tooltip = d3.select("body").append("div")
     .attr("class", "tooltip_scatter")
@@ -229,9 +247,9 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         }) 
         .attr('width', size)
         .attr('height', size)
-        .attr('fill', 'gray')
+        .attr('fill', '#CAF0F8')
         .attr('stroke-width', 8)
-        .attr('stroke', 'white');
+        .attr('stroke', bgColor);
 
     // ----------------Data join functions----------------------------------------
     
@@ -243,7 +261,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
             drawing
             .attr("cx", mouse[0])
             .attr("cy", mouse[1])
-            .attr("fill", "red")
+            .attr("fill", "#023E8A")
             .attr('r', 6)
         }
         
@@ -255,14 +273,19 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         .data(rawData)
         .join(
             enter  => enter.append('path') 
-                .attr('fill', d => colorScale(d.tier))
+                .attr('fill', d => chartColors[d.tier])
                 .attr("d", symbol.size(32))
                 .style("opacity", .8),
             update => update
-                .attr('fill', d => colorScale(d.tier))
+                .attr('fill', (d) => {
+                    if (showClicked || d.name == searchCollege){
+                        return "#D1322A";
+                    }
+                    return chartColors[d.tier];
+                })
                 .attr("d", symbol.size((d) => {
                     if (showClicked || d.name == searchCollege){
-                        return 120;
+                        return 160;
                     }
                     else{
                         return 32;
@@ -275,13 +298,6 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
                     else{
                         return .8
                     }
-                })
-                .style("stroke", "#b3e0ff")
-                .style("stroke-width", (d) => {
-                    if (showClicked || d.name == searchCollege){
-                        return "2px";
-                    }
-                    return "0px";
                 }),
             exit => exit.transition()
             .duration(200)
@@ -333,13 +349,13 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         })
 
         if(isDrawing){
-            d3.select('#scatterText').html("The median family income of a student from " + rawData[0].name + 
-            " is " + "<b>" + "?" + "</b>" + ". The median income of a student at age 34 is " + "<b>" + "?" + "</b>.");
+            d3.select('#scatterText').html("The median family income of a student from <span style='color: #D1322A'>" + searchCollege + 
+            "</span> is " + "<b>" + "?" + "</b>" + ". The median income of a student at age 34 is " + "<b>" + "?" + "</b>.");
         }
     
         else if (showClicked || clusterClicked){
-            d3.select('#scatterText').html("The median family income of a student from " + rawData[0].name + 
-            " is " + "<b>" + rawData[0].par_median + "</b>" + ". The median income of a student at age 34 is " + "<b>" + rawData[0].k_median + "</b>.");
+            d3.select('#scatterText').html("The median family income of a student from <span style='color: #D1322A'>" + searchCollege + 
+            "</span> is " + "<b>" + rawData[0].par_median + "</b>" + ". The median income of a student at age 34 is " + "<b>" + rawData[0].k_median + "</b>.");
         }
 
         //".<br/> Average class size: " + Math.round(rawData[0].count
@@ -357,7 +373,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         svg_people.selectAll('.rectAccess')
         .data(d3.range(accessInput))
         .join(
-            enter  => enter.append('rect').attr('fill', 'black'),
+            enter  => enter.append('rect').attr('fill', '#00B4D8'),
             update => update,
             exit => exit
             .call(exit => exit.transition().duration(500)
@@ -376,14 +392,14 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         .attr('width', size)
         .attr('height', size)
         .attr('stroke-width', 8)
-        .attr('stroke', 'white');
+        .attr('stroke', bgColor);
         
 
         // Success rate: students from poor family who become rich
         svg_people.selectAll('.rectSucess')
             .data(d3.range(successInput))
             .join(
-                enter  => enter.append('rect').attr('fill', 'blue'),
+                enter  => enter.append('rect').attr('fill', '#023E8A'),
                 update => update,
                 exit => exit
                 .call(exit => exit.transition().duration(500)
@@ -402,7 +418,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
             .attr('width', size)
             .attr('height', size)
             .attr('stroke-width', 8)
-            .attr('stroke', 'white');
+            .attr('stroke', bgColor);
 
         if(isDrawing){
             d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average " + "<b>?</b>" +
