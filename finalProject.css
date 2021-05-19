@@ -1,17 +1,24 @@
 body {
-    font-family: "Open Sans", sans-serif;
+    /* font-family: "Open Sans", sans-serif; */
     /* display: grid;
     grid-template-rows: 20% 80%; */
     /* font-size: 16px; */
-    padding: 40px;
-
+    /* padding: 40px; */
 }
 .page {
     height: 100vh;
 }
+
 .page-body{
     display: grid;
     grid-template-columns: 60% 40%;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.section-body{
+    padding-left: 80px;
+    padding-right: 80px;
 }
 
 .state-borders {
@@ -24,15 +31,19 @@ body {
 }
 
 h1 {
-    font-size: 3em;
+    font-size: 6em;
     font-weight: 700;
-    color: #0099FF !important;
+    color: #0077B6 !important;
+}
+
+h2 {
+    font-size: 3em;
 }
 
 stateTitle {
     font-size: 3em;
     font-weight: 700;
-    color: #0099FF
+    color: #0077B6
 }
 .state-selected {
     fill: rgb(84,36,55) !important;
