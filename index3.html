@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Load d3 -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script> 
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script>   -->
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://unpkg.com/rbush@1.4.3/rbush.js"></script>
+    <script src="https://unpkg.com/spamjs@1.1.0/spam.min.js"></script>
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Load Jquery UI css to style autocomplete correctly -->
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
+    <!-- Load bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <!-- Load AOS library for animation on scroll-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="finalProject.css">
+       
+</head>
+
+<body>
+    <header style="background-color:black;">
+        <div class = "section-body" style="width: 1200px; padding-top: 200px; padding-bottom: 280px;">
+            <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300" style="color: white !important;">College Education and Social Mobility in the United States</h1>
+            <br>
+            <br>
+            <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600" style="color: rgb(204, 204, 204) !important;">How does college education impact social mobility in the US? 
+                We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
+        </div>
+    </header>
+
+    
+    <div class="section-body" data-aos="fade-in">
+        <div class="row">
+            <br>
+            <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
+        </div>
+        
+        <div class="row">
+            <div class="col-8">
+                <map>
+                </map>
+            </div>
+
+            <div class="col-4">
+                <tooltip>
+                    <stateTitle>
+                    </stateTitle>
+                    <stats>
+                    </stats>
+                    <stateMap>
+                    </stateMap>
+                    <collegeTable>
+                    </collegeTable>
+                </tooltip>
+            </div>
+
+        </div>
+    </div>
+
+    
+    <div class='section-body'>
+        <div class="row">
+
+            <div class="col-8">
+                <div class='neighborhood-map-holder'>
+                    <div id="legend"></div>
+                    <neighborhood_map>
+    
+                    </neighborhood_map>
+                </div>
+            </div>
+        
+            <div class="col-4">
+                <div class="card">
+                    <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
+                    <div class="card-body">
+                        <div>
+                            CHILD RACE
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                All Races
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                White
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Hispanic
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Black
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Asian
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                American Indian
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    
+<div class="container-fluid" id="section3" style="background-color: #f8feff; padding-top: 6rem; padding-bottom: 3rem;">
+    <div class="section-body">
+        <div class="row" style="padding-bottom: 3rem;">
+            <h2 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100" >Social Mobility by College</h2> 
+        </div>   
+
+        <div class="row">
+            <div class="col-6">
+                <!-- College Name Search -->
+                <div class="row" data-aos="fade-in" data-aos-delay="300" >
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-primary" id='search'>Search</button> 
+                        <button type="button" class="btn btn-outline-primary" id='show'style="display:none">Show Actual</button>
+                        <button type="button" class="btn btn-outline-dark" id='clear' style="display:none">Clear</button> 
+                    </div>
+                </div>
+
+                <br>
+                <div id="scatterChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- Parent and Kid Median Income Scatter Plot -->
+                </div>
+            </div>
+
+            <div class="col-1">
+            </div>
+            
+            <!-- People chart -->
+            <div class="col-4">
+                <h3 data-aos="fade-in" data-aos-delay="300">Family income VS. student income at age 34</h3>
+                <br>
+                <h5 id="scatterText" data-aos="fade-in" data-aos-delay="300"></h5>
+                <div style="padding-top: 20px;" id="peopleChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- People chart -->
+                </div>
+                <br>
+                <h5 id="peopleText" data-aos="fade-in" data-aos-delay="800"></h5>            
+            </div>
+
+            <div class="col-1">
+            </div>
+        </div>
+
+        <div class="row" data-aos="fade-in" data-aos-delay="600">
+            <div class="col">
+                <br>
+                <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
+            </div>
+            <div class="col">
+            </div>
+        </div>
+        
+    </div>
+</main>
+
+    <script src="neighborhood.js"></script>
+
+    <!-- Load JQuery UI from Google's server to increase speed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap Javascript -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- Load AOS Animation on Scroll library and initialize it -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <!-- Visulization -->
+    <script src="finalProject.js"></script>
+    <script src="scatterplot.js"> </script>
+
+    <!-- College Tier Filter -->
+    <!-- <div class="row mt-4">
+        <div class="col">
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Select College Tier
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <button type="button" class="dropdown-item btn btn-link">Ivy Plus</button>
+                  <button type="button" class="dropdown-item btn btn-link">Other elite schools</button>
+                  <button type="button" class="dropdown-item btn btn-link">Highly selective public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Highly selective private</button>
+                  <button type="button" class="dropdown-item btn btn-link">Selective public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Selective private</button>
+                  <button type="button" class="dropdown-item btn btn-link">Nonselective 4-year public</button>
+                  <button type="button" class="dropdown-item btn btn-link">Nonselective 4-year private not-for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Two-year (public and private not-for-profit)</button>
+                  <button type="button" class="dropdown-item btn btn-link">Four-year for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Two-year for-profit</button>
+                  <button type="button" class="dropdown-item btn btn-link">Less than two year schools of any type</button>
+                  <button type="button" class="dropdown-item btn btn-link">Attending college with insufficient data</button>
+                  <button type="button" class="dropdown-item btn btn-link">Not in college between the ages of 19-22</button>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+</body>
+</html>
