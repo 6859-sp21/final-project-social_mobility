@@ -31,154 +31,106 @@
 </head>
 
 <body>
+    <header style="background-color:black;">
+        <div class = "section-body" style="width: 1200px; padding-top: 200px; padding-bottom: 280px;">
+            <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300" style="color: white !important;">College Education and Social Mobility in the United States</h1>
+            <br>
+            <br>
+            <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600" style="color: rgb(204, 204, 204) !important;">How does college education impact social mobility in the US? 
+                We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
+        </div>
+    </header>
+
     
-        <header style="background-color:black;">
-            <div class = "section-body" style="width: 1200px; padding-top: 200px; padding-bottom: 280px;">
-                <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300" style="color: white !important;">Social Mobility in the US</h1>
-                <br>
-                <br>
-                <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600" style="color: rgb(204, 204, 204) !important;">
-                    Everyone works hard for a chance at succceding in this thing called life; or a chace to move out of poverty. 
-                    We sought answers questions on matters  social mobility using anonymous data collated by professors at Harvard. 
-                    The data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
-                    which contains intergenerational  income  mobility data from 2202 colleges and over 30 million college students from 1999-2013.
-
-                    <!-- Some of the questions our visualizations try to answer includ: 
-                    <ul> How does college education impact social mobility in the US? </ul>
-                    <ul> What are your chances of moving out of poverty? </ul>
-                    <ul> How do colleges affect this chance? </ul>
-                    <ul> How do the colleges affect the state social mobility? </ul>
-                    <ul> What about your parent's income? </ul>
-                    <ul> Or even your neighborhood and race? </ul> -->
-                </h5>  
-            </div>
-        </header>
-
-        <br>
-        
-    <div class='page'>
-        <div class="page-body" data-aos="fade-in">
+    <div class="section-body" data-aos="fade-in">
+        <div class="row">
+            <br>
             <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
-            <map>
-            </map>
-            <tooltip>
-                <stateTitle>
-                </stateTitle>
-                <stats>
-                </stats>
-                <stateMap>
-                </stateMap>
-                <collegeTable>
-                </collegeTable>
-            </tooltip>
+        </div>
+        
+        <div class="row">
+            <div class="col-8">
+                <map>
+                </map>
+            </div>
+
+            <div class="col-4">
+                <tooltip>
+                    <stateTitle>
+                    </stateTitle>
+                    <stats>
+                    </stats>
+                    <stateMap>
+                    </stateMap>
+                    <collegeTable>
+                    </collegeTable>
+                </tooltip>
+            </div>
+
         </div>
     </div>
 
-    <script src="finalProject.js"></script>
     
+    <div class='section-body'>
+        <div class="row">
 
-    <div class='page'>
-        <div class='page-body'>
-            <div class='neighborhood-map-holder'>
-                <div id="legend"></div>
-                <neighborhood_map>
-
-                </neighborhood_map>
-                <!-- <div class='neighborhood-tip'>
-
-                </div> -->
+            <div class="col-8">
+                <div class='neighborhood-map-holder'>
+                    <div id="legend"></div>
+                    <neighborhood_map>
+    
+                    </neighborhood_map>
+                </div>
             </div>
-            
-            <div class="card">
-                <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
-            
-                <div class="card-body">
-                    <div > 
-                        <form>
-                            PARENT INCOME 
-                        
-                            <div class="form-check">
-                                <input class="form-check-input all-race" type="radio" name="flexRadioDefault" checked>
-                                <label class="form-check-label" for="flexRadioDefault1">
-                                All 
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input white" type="radio" name="flexRadioDefault">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                High
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input hispanic" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                Medium
-                                </label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input black" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                                <label class="form-check-label" for="flexRadioDefault2">
-                                Black
-                                </label>
-                            </div>
-                        </form>
-                    </div>
-                    <br>
-                    <!-- <div >
-                        CHILD RACE 
-                        <div class="btn child-income">
-                            <div class="btn btn-primary active">All</div>
-                            <div class="btn btn-primary">White</div>
-                            <div class="btn btn-primary">Hispanic</div>
-                            <div class="btn btn-primary">Black</div>
-                            <div class="btn btn-primary">Asian</div>
-                            <div class="btn btn-primary">African American</div>
-                        </div>
-                    </div> -->
-
-                    <div class='child-race'>
-                        <form>
+        
+            <div class="col-4">
+                <div class="card">
+                    <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
+                    <div class="card-body">
+                        <div>
                             CHILD RACE
                             <div class="form-check">
-                                <input class="form-check-input all-race" type="radio" name="flexRadioDefault" checked>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
                                 <label class="form-check-label" for="flexRadioDefault1">
-                                All 
+                                All Races
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input white" type="radio" name="flexRadioDefault">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 White
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input hispanic" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 Hispanic
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input black" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 Black
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input asian" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 Asian
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input american-indian" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 American Indian
                                 </label>
                             </div>
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -261,6 +213,7 @@
     </script>
 
     <!-- Visulization -->
+    <script src="finalProject.js"></script>
     <script src="scatterplot.js"> </script>
 
     <!-- College Tier Filter -->
