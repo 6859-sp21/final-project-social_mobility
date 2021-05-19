@@ -9,6 +9,7 @@ body {
 
 .page {
     height: 100vh;
+    background-color: #f8feff;
 }
 
 /* .page-body{
@@ -17,8 +18,7 @@ body {
 }  */
 
 .section-body{
-    padding-left: 80px;
-    padding-right: 80px;
+    padding-left: 10%; padding-right: 10%;
 }
 
 .state-borders {
@@ -33,7 +33,7 @@ body {
 h1 {
     font-size: 6em;
     font-weight: 700;
-    color: #0077B6 !important;
+    /* color: #0077B6 !important; */
 }
 
 h2 {
