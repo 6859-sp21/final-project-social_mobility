@@ -12,8 +12,6 @@ body {
 .page-body{
     display: grid;
     grid-template-columns: 60% 40%;
-    padding-left: 80px;
-    padding-right: 80px;
 }
 
 .section-body{
