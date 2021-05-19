@@ -4,6 +4,9 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 
+<button onclick="update('tier1')">Tier 1</button>
+<button onclick="update('tier2')">Tier 2</button>
+
 <!-- Create a div where the graph will take place -->
 <div id="my_dataviz"></div>
 
@@ -55,11 +58,19 @@
     .filter(function(d) {return d.tier == '1'; })
     .append("rect")
       .attr("x", function(d) { return x(d.name); })
-      .attr("y", function(d) { return y(d.female); })
-      .attr("width", x.bandwidth())
-      .attr("height", function(d) { return height - y(d.female); })
       .attr("fill", "#69b3a2")
+      .attr("width", x.bandwidth())
+      .attr("height", function(d) { return height - y(0); })
+      .attr("y", function(d) { return y(0); })
   
+  // Animation
+  svg.selectAll("rect")
+    .transition()
+    .duration(800)
+    .attr("y", function(d) { return y(d.female); })
+    .attr("height", function(d) { return height - y(d.female); })
+    .delay(function(d,i){console.log(i) ; return(i*100)})
+
   })
   
   </script>
