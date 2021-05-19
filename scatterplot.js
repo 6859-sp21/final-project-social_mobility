@@ -7,6 +7,13 @@ let isDrawing = false;
 let showClicked = false;
 let clusterClicked = false;
 
+const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  })
+  
+
 var chartColors = {
     1: "#03045e",
     2: "#023E8A",
@@ -107,6 +114,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         searchCollege = "";
         drawing.remove();
         drawing = svg.append("circle");
+        searchButton.style('display', '');
         showButton.style('display', 'none');
         clearButton.style('display', 'none');
         document.getElementById('collegeSearch').value = "";
@@ -349,19 +357,24 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         })
 
         if(isDrawing){
-            d3.select('#scatterText').html("The median family income of a student from <span style='color: #D1322A'>" + searchCollege + 
-            "</span> is " + "<b>" + "?" + "</b>" + ". The median income of a student at age 34 is " + "<b>" + "?" + "</b>.");
+            d3.select('#collegeName').html(searchCollege);
+            d3.select('#scatterText').html("The median family income of a student from " + searchCollege + 
+            " is " + "<span style='color: #D1322A'>" + "?" + "</span>" + ". The median income of a student at age 34 is " + "<span style='color: #D1322A'>" + "?" + "</span>.");
         }
     
         else if (showClicked || clusterClicked){
-            d3.select('#scatterText').html("The median family income of a student from <span style='color: #D1322A'>" + searchCollege + 
-            "</span> is " + "<b>" + rawData[0].par_median + "</b>" + ". The median income of a student at age 34 is " + "<b>" + rawData[0].k_median + "</b>.");
+            d3.select('#collegeName').html(searchCollege);
+            d3.select('#scatterText').html("The median family income of a student from " + searchCollege + 
+            " is " + "<span style='color: #D1322A'>" + formatter.format(rawData[0].par_median) + "</span>" + 
+            ". The median income of a student at age 34 is " + "<span style='color: #D1322A'>" + formatter.format(rawData[0].k_median) + "</span>.");
         }
 
         //".<br/> Average class size: " + Math.round(rawData[0].count
 
         else{
-            d3.select('#scatterText').html("The average median family income of students from all colleges is " + avgPar + ". The average median income of students at age 34 is " + avgK + ".");
+            d3.select('#collegeName').html('All Colleges');
+            d3.select('#scatterText').html("The average median family income of students from all colleges is " + formatter.format(avgPar) + 
+            ". The average median income of students at age 34 is " + formatter.format(avgK) + ".");
         }
         
     }
@@ -421,18 +434,19 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
             .attr('stroke', bgColor);
 
         if(isDrawing){
-            d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average " + "<b>?</b>" +
-            " come from poor family, and " + "<b>?</b>" + "  of those from a poor family become rich adults.");
+            d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average " + "<span style='color: #D1322A'>?</span>" +
+            " come from poor family, and " + "<span style='color: #D1322A'>?</span>" + "  of those from a poor family become rich adults. The mobility rate is about<span style='color: #D1322A'>?</span>");
         }
     
         else if (showClicked || clusterClicked){
-            d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average <b>" + searchAccess +
-            "</b> come from poor family, and <b>" + searchSuccess + "</b> of those from a poor family become rich adults.");
+            d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average <span style='color: #D1322A'>" + searchAccess +
+            "</span> come from poor family, and <span style='color: #D1322A'>" + searchSuccess + "</span> of those from a poor family become rich adults. The mobility rate is about<span style='color: #D1322A'>" + 
+            searchSuccess + "%</span>.");
         }
 
         else{
-            d3.select('#peopleText').html("Out of 100 college students, on average <b>" + avgAccess +
-            "</b> come from poor family, and <b>" + avgSuccess + "</b> of those from a poor family become rich adults.");
+            d3.select('#peopleText').html("Out of 100 college students, on average " + avgAccess +
+            " come from poor family, and " + avgSuccess + " of those from a poor family become rich adults. The mobility rate is about" + avgSuccess + "%.");
         }
         
     }
