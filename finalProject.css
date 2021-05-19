@@ -1,5 +1,5 @@
 body {
-    /* background-color: rgba(0,0,0,.125); */
+    background-color: #f8feff;
     /* font-family: "Open Sans", sans-serif; */
     /* display: grid;
     grid-template-rows: 20% 80%; */
@@ -9,7 +9,6 @@ body {
 
 .page {
     height: 100vh;
-    background-color: #f8feff;
 }
 
 /* .page-body{
