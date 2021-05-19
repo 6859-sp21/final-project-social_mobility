@@ -2,8 +2,13 @@
 
 Team member: Zhixin Lin, Christabel Sitienei, Yen-ting Wang
 
+![Summary Image 1](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summaryImage%201.jpg)
+![Summary Image 2](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summaryImage%202.jpg)
+
 Paper Link: https://github.com/6859-sp21/final-project-social_mobility/blob/main/final/social%20mobility_paper.pdf
+
 Video teaser link: https://youtu.be/prDIlUe2fD8
+
 Website link: https://6859-sp21.github.io/final-project-social_mobility/
 
 ## Abstract
