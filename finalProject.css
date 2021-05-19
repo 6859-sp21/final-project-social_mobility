@@ -1,4 +1,5 @@
 body {
+    /* background-color: rgba(0,0,0,.125); */
     /* font-family: "Open Sans", sans-serif; */
     /* display: grid;
     grid-template-rows: 20% 80%; */
@@ -6,14 +7,14 @@ body {
     /* padding: 40px; */
 }
 
-/* .page {
+.page {
     height: 100vh;
 }
 
-.page-body{
+/* .page-body{
     display: grid;
     grid-template-columns: 60% 40%;
-} */
+}  */
 
 .section-body{
     padding-left: 80px;
@@ -61,7 +62,16 @@ tooltip {
     display: flex;
     flex-flow: column;
 }
-        
+.state-details {
+    display: grid;
+    grid-template-columns: 60% 40%;
+}  
+
+.neighborhood-details {
+    display: grid;
+    grid-template-columns: 70% 30%;
+
+}
 /* Legend Font Style
 body {
 	font: 11px sans-serif;
@@ -100,6 +110,13 @@ li.key {
 
 .card {
     height: fit-content;
+    width: fit-content;
+    font-size: 70%;
+}
+
+.card-body {
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .neighborhood-tip {
@@ -108,4 +125,17 @@ li.key {
     display: flex;
     font-family: sans-serif;
     max-width: 500px;
+}
+
+map {
+    display: flex;
+    flex-flow: row-reverse;
+}
+
+
+tr {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 0.5px solid gainsboro;
+    padding-bottom: 5px;
 }

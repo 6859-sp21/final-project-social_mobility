@@ -80,19 +80,22 @@ function load(geoData, csvData) {
     var roundedMedian = roundToNearestThousand(median)
 
 
-    var values = [ roundedMedian-(thousand*6), roundedMedian-(thousand*4), 
-                    roundedMedian-(thousand*2), roundedMedian-thousand, roundedMedian, roundedMedian+thousand, 
-                    roundedMedian+(thousand*2), roundedMedian+(thousand*4), roundedMedian+(thousand*6), 
-                    roundedMedian+(thousand*7) ]
+    // var values = [ roundedMedian-(thousand*6), roundedMedian-(thousand*4), 
+    //                 roundedMedian-(thousand*2), roundedMedian-thousand, roundedMedian, roundedMedian+thousand, 
+    //                 roundedMedian+(thousand*2), roundedMedian+(thousand*4), roundedMedian+(thousand*6), 
+    //                 roundedMedian+(thousand*7) ]
 
-
+    var values = [ 22000, 24000, 
+        26000, 28000,  30000, 32000, 34000, 36000, 38000, 
+        40000 ]
 
     var colorScale = d3.scaleThreshold()
                         .domain(values)
                         .range(colors)
 
     var projection = d3.geoAlbersUsa()
-                    .scale(1000)
+                    .scale(1200)
+                    .translate([width/3, height/2])
 
     var geoPath = d3.geoPath()
                     .projection(projection)
@@ -215,8 +218,28 @@ var geoData = []
 
 function update() {
 
+
+    
+    if (d3.select(".all-income").property("checked")){
+        selectedIncome = 'All'
+        console.log("all_race selected")
+    }
+
+    else if(d3.select(".high").property("checked")){
+        selectedIncome = 'High'
+    }
+
+    else if(d3.select(".medium").property("checked")){
+        selectedIncome = "Medium"
+    }
+
+    else if(d3.select(".low").property("checked")){
+        selectedIncome = "Low"
+
+    }
+
     // traits filter
-    if(d3.select(".all-race").property("checked")){
+    if (d3.select(".all-race").property("checked")){
         selectedRace = 'All'
         console.log("all_race selected")
     }
@@ -240,10 +263,12 @@ function update() {
     else if(d3.select(".american-indian").property("checked")){
         selectedRace = "AmericanIndian"
     }
+    console.log()
 
     d3.selectAll(".incomeDataMap").remove();	
     d3.selectAll(".list-inline").remove();
     d3.selectAll(".neighborhood-tip").remove();
+    
     load(geoData, collatedData)
 }
 

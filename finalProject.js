@@ -47,6 +47,9 @@ const isMobilityRateNotNan = (x) => {
 //     return stateData.features.filter(x => x.properties.name == stateName)
 // }
 
+const lowColor = "#D4EEFF";
+const highColor = "#0099FF"
+
 const getCollegeMobilityRates = (mobilityData, abbr) => {
         let filtered = mobilityData.filter( x => x.state === abbr)
 
@@ -58,7 +61,12 @@ const getCollegeMobilityRates = (mobilityData, abbr) => {
         let result = []
 
         for (const object of sorted) { 
-            result[object.name] = object[mobilityRate]
+            let temp =  {
+                College : object.name, 
+                // Mobility: object[mobilityRate]
+                Mobility : (Math.round(object[mobilityRate] * 10000)/100).toFixed(2) + "%"
+            }
+            result.push(temp)
         }
 
         return  result
@@ -69,13 +77,15 @@ const generateMap = (stateData, mobilityData) => {
     // console.log(getMinMaxStateAverage(mobilityData))
 
     var colorScale = d3.scaleLinear()
-                        .range(["#D4EEFF", "#0099FF"])
+                        .range([lowColor, highColor])
                         .interpolate(d3.interpolateLab)
                         .domain(getMinMaxStateAverage(mobilityData))
 
     // console.log(d3.extent(mobilityData, (d) => { return parseFloat(d[mobilityRate])}))
 
     const getColor = (d) => {
+        // console.log(d)
+
         let stateName = d.properties.name
         let stateAbbr = stateNameToAbbr[stateName]
 
@@ -130,7 +140,7 @@ const generateMap = (stateData, mobilityData) => {
             
             // console.log(stateAbbr)
 
-            // console.log()
+            // console.log(d)
 
             return getColor(d)
        })
@@ -150,85 +160,109 @@ const generateMap = (stateData, mobilityData) => {
             let abbr = stateNameToAbbr[stateName]
             let stateAvg = getStateAvg(mobilityData, stateName)
             stateNameHtml.text(`${stateName}`)
-            stats.text(`Avg Mobility Rate : ${stateAvg}`)
+            stats.text("Avg Mobility Rate : " + (Math.round(stateAvg * 10000)/100).toFixed(2) + "%")
             tooltip.style("visibility", "visible")
-            stateSelected(d.properties.name)
+            
+            // stateSelected(d.properties.name)
 
             
             let collegeToMobilityRateAvg = getCollegeMobilityRates(mobilityData, abbr)
 
-            let blue  = ["christa", "jebi", 'mbrim']
+            // var colums = [
+            //     {head: 'College', cl: 'title', html: d3.f('college')},
+            //     {head: 'Avg. Mobility Rate', cl: 'num',  html: d3.f('mobilityRate', d3.format('.2f')) }
+
+            // ]
+
+            var columns = ['College', 'Mobility']
+
+            console.log(collegeToMobilityRateAvg)
+
+            // Need to remove something here probably
+
+            d3.selectAll("table").remove();
+
+            var table = d3.select("collegetable")
+                                  .append('table')
+
+            // console.log(table)
+            
+            let thead = table.append('thead')
+            let tbody = table.append('tbody')
+
+            thead.append('tr')
+                .selectAll('th')
+                .data(columns)
+                .enter()
+                .append('th')
+                .text(d => d)
+
+            var rows = tbody.selectAll('tr')
+                            .data(collegeToMobilityRateAvg)
+                            .enter()
+                            .append('tr')
+            
+            var cells = rows.selectAll('td')
+                            .data(function(row) {
+                                return columns.map(function(column) {
+                                    return {column: column, value: row[column]};
+                                });
+                            
+                            })
+                            .enter()
+                            .append('td')
+                            .html(d => d.value)
 
             
-            let stateFeatures = stateData.features.filter(x => x.properties.name == stateName)
-            stateSelected(stateFeatures)
-            // console.log(stateFeatures)
-            // collegeTable.selectAll('div')
-            //     .data(blue)
-            //     .enter()
-            //     .append('div')
-            //     .text('blah)
+            
 
-            // console.log(d3.select(this).node())
-            // stateSelected(stateName)
-            // console.log(getStateFeatures(stateData, stateName))
 
        })
 
-    //    svg.append("g")
-    //      .attr("class", "legendLinear")
-    //      .attr("transform", "translate(20,20)");
-   
-    //    var legendLinear = d3.legend.color()
-    //      .shapeWidth(30)
-    //      .orient('horizontal')
-    //      .scale(linear);
-   
-    //    svg.select(".legendLinear")
-    //      .call(legendLinear);
-       
+		var w = 140, h = 300;
 
-    function stateSelected(stateFeatures) {
+		var key = d3.select("map")
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h)
+                    .attr("class", "legend");
 
-        // let stateFeatures = getStateFeatures(stateData, stateName)
+        var legend = key.append("defs")
+            .append("svg:linearGradient")
+            .attr("id", "gradient")
+            .attr("x1", "100%")
+            .attr("y1", "0%")
+            .attr("x2", "100%")
+            .attr("y2", "100%")
+            .attr("spreadMethod", "pad");
 
-        // console.log(stateFeatures)
-
-        // console.log(stateData)
-        var stateProjection = d3.geoAlbersUsa()
-                            // .translate([width/3, height/5])
-                                .scale([1000])
-        
-        var statePath = d3.geoPath()
-                        .projection(stateProjection)
-    
-    
-        var stateSvg = d3.select("stateMap")
-                            .append("svg")
-                            .attr("width", width)
-                            .attr("height", height)
-
-        
-
-
-
-        var state = stateSvg.select("statePath")
-                        .data(stateFeatures)
-                        .enter()
-                        .append("path")
-                        .attr("d", statePath)
-                        .style("stroke", "#fff")
-                        .style("stroke-width", "0.5")
-                        .attr("fill", function(d, i) {
-
-                            console.log(d3.select(this).node())
-                            return getColor(d)
-                        })
+        legend.append("stop")
+            .attr("offset", "0%")
+            .attr("stop-color", highColor)
+            .attr("stop-opacity", 1);
             
-        // console.log(getStateFeatures(stateData, stateName))
+        legend.append("stop")
+            .attr("offset", "100%")
+            .attr("stop-color", lowColor)
+            .attr("stop-opacity", 1);
 
-    }
-       
+        key.append("rect")
+            .attr("width", w - 100)
+            .attr("height", h)
+            .style("fill", "url(#gradient)")
+            .attr("transform", "translate(0,10)");
+
+        var y = d3.scaleLinear()
+            .range([h, 0])
+            .domain([getMinMaxStateAverage(mobilityData)[0], getMinMaxStateAverage(mobilityData)[1]]);
+
+        var yAxis = d3.axisRight(y);
+
+        key.append("g")
+            .attr("class", "y axis")
+            .attr("transform", "translate(41,10)")
+            .call(yAxis)
+     
 }
 
 

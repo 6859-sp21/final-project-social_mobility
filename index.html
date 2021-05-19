@@ -57,29 +57,52 @@
         <br>
         
     <div class='page'>
-        <div class="page-body" data-aos="fade-in">
-            <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
-            <map>
-            </map>
-            <tooltip>
-                <stateTitle>
-                </stateTitle>
-                <stats>
-                </stats>
-                <!-- <stateMap>
-                </stateMap> -->
-                <collegeTable>
-                </collegeTable>
-            </tooltip>
+        <div class="page-body" data-aos="fade-in" data-aos="fade-in" data-aos-delay="300">
+            <h3 data-aos="fade-in" data-aos-delay="300">Social Mobility Rates by State</h3>
+            <br>
+            <div class='state-details'>
+                <div>
+                    <div id="state-legend"></div>
+                    <map>
+                    </map>
+                </div>
+                <tooltip>
+                    <stateTitle>
+                    </stateTitle>
+                    <stats>
+                    </stats>
+                    <!-- <stateMap>
+                    </stateMap> -->
+                    <br>
+                    <br>
+                    <collegeTable>
+                        Colleges with the highest Mobility
+                    </collegeTable>
+                </tooltip>
+            </div>  
         </div>
+    </div>
+    <div class="page">
+        <div style="padding-left: 10%; padding-right: 30%">
+            <h2 data-aos="fade-in" data-aos-delay="300"> Neighborhood Data: Individual Income vs Race & Parent Income </h2>
+            <br>
+            <h5 data-aos="fade-in" data-aos-delay="500" style="width: 50 ">
+                Using neighborhood data, we investigate how an individual income(excluding spouse income) changes given their race and their parent's income. 
+                High income is defined as 75th percentile incomes of all incomes, while medium income 50th percentile and low income 25th percentile. </p>
+                <br>
+                Curious? Go scroll down to interact with the map. 
+                Toggle the filters on the right to find out how race and parent income affect child mobility on a neighborhood level!
+            </h5>
+        </div>
+
     </div>
 
     <script src="finalProject.js"></script>
     
 
     <div class='page'>
-        <div class='page-body'>
-            <div class='neighborhood-map-holder'>
+        <div class='page-body neighborhood-details'>
+            <div data-aos="fade-in" data-aos-delay="300" class='neighborhood-map-holder'>
                 <div id="legend"></div>
                 <neighborhood_map>
 
@@ -89,7 +112,7 @@
                 </div> -->
             </div>
             
-            <div class="card">
+            <div data-aos="fade-in" data-aos-delay="300"  class="card">
                 <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
             
                 <div class="card-body">
@@ -98,43 +121,32 @@
                             PARENT INCOME 
                         
                             <div class="form-check">
-                                <input class="form-check-input all-race" type="radio" name="flexRadioDefault" checked>
+                                <input class="form-check-input all-income" type="radio" name="flexRadioDefault" checked>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                 All 
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input white" type="radio" name="flexRadioDefault">
+                                <input class="form-check-input high" type="radio" name="flexRadioDefault">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 High
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input hispanic" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input medium" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
                                 Medium
                                 </label>
                             </div>
                             <div class="form-check">
-                                <input class="form-check-input black" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <input class="form-check-input low" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
                                 <label class="form-check-label" for="flexRadioDefault2">
-                                Black
+                                Low
                                 </label>
                             </div>
                         </form>
                     </div>
                     <br>
-                    <!-- <div >
-                        CHILD RACE 
-                        <div class="btn child-income">
-                            <div class="btn btn-primary active">All</div>
-                            <div class="btn btn-primary">White</div>
-                            <div class="btn btn-primary">Hispanic</div>
-                            <div class="btn btn-primary">Black</div>
-                            <div class="btn btn-primary">Asian</div>
-                            <div class="btn btn-primary">African American</div>
-                        </div>
-                    </div> -->
 
                     <div class='child-race'>
                         <form>
