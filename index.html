@@ -32,43 +32,51 @@
 
 <body>
     
-        <header style="background-color:black;">
-            <div class = "section-body" style="width: 1200px; padding-top: 200px; padding-bottom: 280px;">
-                <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300" style="color: white !important;">Social Mobility in the US</h1>
-                <br>
-                <br>
-                <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600" style="color: rgb(204, 204, 204) !important;">
-                    Everyone works hard for a chance at succceding in this thing called life; or a chace to move out of poverty. 
-                    We sought answers questions on matters  social mobility using anonymous data collated by professors at Harvard. 
-                    The data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
-                    which contains intergenerational  income  mobility data from 2202 colleges and over 30 million college students from 1999-2013.
-
-                    <!-- Some of the questions our visualizations try to answer includ: 
-                    <ul> How does college education impact social mobility in the US? </ul>
-                    <ul> What are your chances of moving out of poverty? </ul>
-                    <ul> How do colleges affect this chance? </ul>
-                    <ul> How do the colleges affect the state social mobility? </ul>
-                    <ul> What about your parent's income? </ul>
-                    <ul> Or even your neighborhood and race? </ul> -->
-                </h5>  
-            </div>
-        </header>
-
-    
-        <div class="page">
-            <div style="padding-left: 10%; padding-right: 30%; padding-top: 10%">
-                <h2 data-aos="fade-in" data-aos-delay="300"> Colleges and State Mobility</h2>
-                <br>
-                <h5 data-aos="fade-in" data-aos-delay="500" style="width: 50 ">
-                    Using College Data, we investigate  how each college's mobility rate feeds into the state mobility rate.
-                    We map out all us states along with their state average to find out how each state compares with the other. 
+    <header style="background-color: #f8feff;">
+        <div class = "section-body" style="padding-top: 200px; padding-bottom: 280px;">
+            <div class="row">
+                <div class="col-9">
+                    <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">Social Mobility in the US</h1>
                     <br>
-                    Curious? Scroll down to interact with the map. 
-                    Click on each state to find out what mobility looks like; along with to see if your university makes the 10 list!
-                </h5>
+                    <br>
+                    <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                        Everyone works hard for a chance at succeeding in this thing called life; or a chance to move out of poverty. 
+                        We sought answers to questions on matters of social mobility using anonymous data collated by professors at Harvard. 
+                        The data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                        which contains intergenerational  income  mobility data from 2202 colleges and over 30 million college students from 1999-2013.
+
+                        <!-- Some of the questions our visualizations try to answer includ: 
+                        <ul> How does college education impact social mobility in the US? </ul>
+                        <ul> What are your chances of moving out of poverty? </ul>
+                        <ul> How do colleges affect this chance? </ul>
+                        <ul> How do the colleges affect the state social mobility? </ul>
+                        <ul> What about your parent's income? </ul>
+                        <ul> Or even your neighborhood and race? </ul> -->
+                    </h5>  
+                </div>
+
+                <div class="col-3">
+                </div>
             </div>
-    
+            
         </div>
+    </header>
+
+    
+    <div class="page">
+        <div style="padding-left: 10%; padding-right: 30%; padding-top: 10%">
+            <h2 data-aos="fade-in" data-aos-delay="300"> Colleges and State Mobility</h2>
+            <br>
+            <h5 data-aos="fade-in" data-aos-delay="500" style="width: 50 ">
+                Using college data, we investigate how each college's mobility rate feeds into the state mobility rate.
+                We map out all us states along with their state average to find out how each state compares with the other. 
+                <br>
+                Curious? Scroll down to interact with the map. 
+                Click on each state to find out what mobility looks like; along with to see if your university makes the top 10 list!
+            </h5>
+        </div>
+
+    </div>
         
     <div class='page'>
         <div class="page-body" data-aos="fade-in" data-aos="fade-in" data-aos-delay="300">
@@ -241,7 +249,7 @@
             </div>
             
             <!-- People chart -->
-            <div class="col-4">
+            <div class="col-5">
                 <h3 data-aos="fade-in" data-aos-delay="300">Family income VS. student income at age 34</h3>
                 <br>
                 <h5 id="scatterText" data-aos="fade-in" data-aos-delay="300"></h5>
@@ -252,8 +260,6 @@
                 <h5 id="peopleText" data-aos="fade-in" data-aos-delay="800"></h5>            
             </div>
 
-            <div class="col-1">
-            </div>
         </div>
 
         <div class="row" data-aos="fade-in" data-aos-delay="600">
@@ -266,7 +272,7 @@
         </div>
         
     </div>
-</main>
+</div>
 
     <script src="neighborhood.js"></script>
 
