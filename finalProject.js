@@ -181,8 +181,10 @@ const generateMap = (stateData, mobilityData) => {
             // Need to remove something here probably
 
             d3.selectAll("table").remove();
+            d3.selectAll(".collegetable-header").remove();
 
             collegeTable.append("h4")
+                        .attr('class', "collegetable-header")
                         .text("Colleges with the highest Mobility")
 
             var table = d3.select("collegetable")
