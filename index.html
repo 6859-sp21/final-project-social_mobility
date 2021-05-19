@@ -7,8 +7,15 @@
     <!-- Load d3 -->
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://d3js.org/d3-array.v2.min.js"></script>
-    <script src="https://d3js.org/d3-geo.v2.min.js"></script>
-    <script src="https://d3js.org/topojson.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script> 
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script>   -->
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://unpkg.com/rbush@1.4.3/rbush.js"></script>
+    <script src="https://unpkg.com/spamjs@1.1.0/spam.min.js"></script>
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Load Jquery UI css to style autocomplete correctly -->
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
@@ -21,33 +28,92 @@
 </head>
 
 <body>
-    <header>
-        <div style="width: 1400px">
-            <h1>Social Mobility Across Colleges in the United States</h1>
-            <h5>How does college education impact social mobility in the US? 
-                We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
-                which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
-        </div>
-    </header>
+    <div class='page'>
+        <header>
+            <div style="width: 1400px">
+                <h1>Social Mobility in the United States</h1>
+                <h5>How does college education impact social mobility in the US? 
+                    We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                    which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
+            </div>
+        </header>
 
-    <br>
-    <h2>Social Mobility Rates by State</h2>
-    <div class="page-body">
-        <map>
-        </map>
-        <tooltip>
-            <state>
-            </state>
-            <stats>
-            </stats>
-            <collegeTable>
-            </collegeTable>
-        </tooltip>
+        <br>
+        <h2>Social Mobility Rates by State</h2>
+        <div class="page-body">
+            <map>
+            </map>
+            <tooltip>
+                <stateTitle>
+                </stateTitle>
+                <stats>
+                </stats>
+                <stateMap>
+                </stateMap>
+                <collegeTable>
+                </collegeTable>
+            </tooltip>
+        </div>
     </div>
+
+    <script src="finalProject.js"></script>
     
 
-    <!-- -----------------------Scatter Plot ------------------------------------>
+    <div class='page'>
+        <div class='page-body'>
+            <div class='neighborhood-map-holder'>
+                <div id="legend"></div>
+                <neighborhood_map>
 
+                </neighborhood_map>
+            </div>
+            
+            <div class="card">
+                <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
+                <div class="card-body">
+                    <div>
+                        CHILD RACE
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                            <label class="form-check-label" for="flexRadioDefault1">
+                            All Races
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            White
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Hispanic
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Black
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            Asian
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                            <label class="form-check-label" for="flexRadioDefault2">
+                            American Indian
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <h1 style="text-align: center;">Social Mobility by College</h1>    
     <br>
     
@@ -81,6 +147,8 @@
             <h5 id="scatterText"></h5>
         </div>
     </div>
+    
+    <script src="neighborhood.js"></script>
 
     <!-- People chart -->
     <div class="row mt-5">
