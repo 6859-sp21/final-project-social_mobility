@@ -435,18 +435,18 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
 
         if(isDrawing){
             d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average " + "<span style='color: #D1322A'>?</span>" +
-            " come from poor family, and " + "<span style='color: #D1322A'>?</span>" + "  of those from a poor family become rich adults. The mobility rate is about<span style='color: #D1322A'>?</span>");
+            " come from poor family, and " + "<span style='color: #D1322A'>?</span>" + "  of those from a poor family become rich adults. The mobility rate is about <span style='color: #D1322A'>?</span>");
         }
     
         else if (showClicked || clusterClicked){
             d3.select('#peopleText').html("Out of 100 " + searchCollege + " students, on average <span style='color: #D1322A'>" + searchAccess +
-            "</span> come from poor family, and <span style='color: #D1322A'>" + searchSuccess + "</span> of those from a poor family become rich adults. The mobility rate is about<span style='color: #D1322A'>" + 
+            "</span> come from poor family, and <span style='color: #D1322A'>" + searchSuccess + "</span> of those from a poor family become rich adults. The mobility rate is about <span style='color: #D1322A'>" + 
             searchSuccess + "%</span>.");
         }
 
         else{
             d3.select('#peopleText').html("Out of 100 college students, on average " + avgAccess +
-            " come from poor family, and " + avgSuccess + " of those from a poor family become rich adults. The mobility rate is about" + avgSuccess + "%.");
+            " come from poor family, and " + avgSuccess + " of those from a poor family become rich adults. The mobility rate is about " + avgSuccess + "%.");
         }
         
     }
