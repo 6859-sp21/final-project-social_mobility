@@ -79,7 +79,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
             clusterClicked = false;
             searchButton.style('display', 'none');
             showButton.style('display', '');
-            tierLabel.text("Draw your guess on the chart! Then click 'show actual' button");
+            tierLabel.text("Draw your guess on the chart! Then click 'show actual' button").attr('fill', highlight);
             updateChart();
         }
     })
@@ -92,7 +92,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
                 clusterClicked = false;
                 searchButton.style('display', 'none');
                 showButton.style('display', '');
-                tierLabel.text("Draw your guess on the chart! Then click 'show actual' button");
+                tierLabel.text("Draw your guess on the chart! Then click 'show actual' button to compare your result.").attr('fill', highlight);
                 updateChart();
             }
         }
@@ -104,7 +104,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         showButton.style('display', 'none');
         searchButton.style('display', '');
         clearButton.style('display', '');
-        tierLabel.text(searchCollege);
+        tierLabel.text(searchCollege + " is shown. Did you get it right?").attr('fill', highlight);
         updateChart();
     })
 
@@ -118,7 +118,7 @@ d3.csv("https://raw.githubusercontent.com/6859-sp21/final-project-social_mobilit
         showButton.style('display', 'none');
         clearButton.style('display', 'none');
         document.getElementById('collegeSearch').value = "";
-        tierLabel.text("");
+        tierLabel.text("").attr('fill', 'gray');
         g.selectAll('path').remove();
         chartsDataJoin();
     })
