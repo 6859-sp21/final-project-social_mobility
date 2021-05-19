@@ -22,6 +22,9 @@
 
     <!-- Load bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <!-- Load AOS library for animation on scroll-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <link rel="stylesheet" href="finalProject.css">
        
@@ -31,16 +34,16 @@
     <div class='page'>
         <header>
             <div style="width: 1400px">
-                <h1>Social Mobility in the United States</h1>
-                <h5>How does college education impact social mobility in the US? 
+                <h1 data-aos="fade-in" data-aos-duration="1000">Social Mobility in the United States</h1>
+                <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">How does college education impact social mobility in the US? 
                     We looked at the data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
                     which contains intergenerational  income  mobility  at  2202 colleges in the United States using data for over 30 million college students from 1999-2013.</h5>
             </div>
         </header>
 
         <br>
-        <h2>Social Mobility Rates by State</h2>
-        <div class="page-body">
+        <h2 data-aos="fade-in" data-aos-delay="500" data-aos-duration="1000">Social Mobility Rates by State</h2>
+        <div class="page-body" data-aos="fade-in">
             <map>
             </map>
             <tooltip>
@@ -114,13 +117,15 @@
             </div>
         </div>
     </div>
-    <h1 style="text-align: center;">Social Mobility by College</h1>    
+
+    
+    <h1 data-aos="fade-in" style="text-align: center;">Social Mobility by College</h1>    
     <br>
     
     <div class="row">
         <div class="col-6">
             <!-- College Name Search -->
-            <div class="row">
+            <div class="row" data-aos="fade-in">
                 <div class="col">
                     <div class="input-group">
                         <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
@@ -135,7 +140,7 @@
             </div>
 
             <br>
-            <div id="scatterChart">
+            <div id="scatterChart" data-aos="fade-in">
                 <!-- Parent and Kid Median Income Scatter Plot -->
             </div>
         </div>
@@ -145,19 +150,19 @@
         
         <!-- People chart -->
         <div class="col-4">
-            <h3>Family income VS. student income at age 34</h3>
+            <h3 data-aos="fade-in">Family income VS. student income at age 34</h3>
             <br>
-            <h5 id="scatterText"></h5>
-            <div style="padding-top: 20px;" id="peopleChart"></div>
+            <h5 id="scatterText" data-aos="fade-in"></h5>
+            <div style="padding-top: 20px;" id="peopleChart" data-aos="fade-in"></div>
             <br>
-            <h5 id="peopleText"></h5>            
+            <h5 id="peopleText" data-aos="fade-in"></h5>            
         </div>
 
         <div class="col-1">
         </div>
     </div>
 
-    <div class="row">
+    <div class="row" data-aos="fade-in">
         <div class="col">
             <br>
             <P>This chart compares family income and student income broken down by college. You can search for a college that you interested in or click on the graph to see a specific college tier cluster.</P>
@@ -177,6 +182,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     
+    <!-- Load AOS Animation on Scroll library and initialize it -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
     <!-- Visulization -->
     <script src="scatterplot.js"> </script>
 
