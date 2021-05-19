@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<style>
+
+.cz {
+  stroke: black;
+  stroke-width: 1px;
+  fill: #EEE;
+}
+
+.cz:hover {
+  fill: #C00;
+}
+
+</style>
+</head>
+
+<svg width="960" height="700"></svg>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/topojson.v2.min.js"></script>
+<script>
+
+var svg = d3.select("svg");
+
+var path = d3.geoPath();
+
+var q = d3.queue()
+    .defer(d3.json, "https://d3js.org/us-10m.v1.json")
+    .defer(d3.json, "czs_fips.json")  // converted to JSON from https://www.ers.usda.gov/webdocs/DataFiles/Commuting_Zones_and_Labor_Market_Areas__17970/cz00_eqv_v1.xls?v=40961
+    .awaitAll(function(error, results) {
+      if (error) throw error;
+        // console.log(results)
+
+      var us = results[0];
+      console.log
+      var czs_fips = results[1];
+      var cz_lookup = {};   // connect fips codes to commuting zones
+      var cz_ids = {};     // get a unique list of commuting zones
+
+      czs_fips.forEach(function(d) {
+        cz_lookup[d.fips] = d.cz_id;
+        cz_ids[d.cz_id] = 1;
+      });
+
+      cz_lookup["46102"] = cz_lookup["46113"]; // We gotcha, Oglala Lakota
+    
+      var commuting_zones = [];
+      
+      d3.keys(cz_ids).forEach(function(cz_id) {
+        var commuting_zone = topojson.merge(us, us.objects.counties.geometries.filter(function(d) { return cz_lookup[d.id] == cz_id; }));
+        commuting_zones.push(commuting_zone);        
+      });
+      console.log(commuting_zones)
+
+      svg.append("g").attr("id", "czs").selectAll(".cz")
+        .data(commuting_zones)
+        .enter()
+        .append("path")
+        .attr("class", "cz")
+        .attr("d", function(d) {
+          return path(d);
+        });
+    });
+
+</script>
