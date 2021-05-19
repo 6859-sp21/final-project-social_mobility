@@ -2,9 +2,6 @@
 
 Team member: Zhixin Lin, Christabel Sitienei, Yen-ting Wang
 
-![Summary Image 1](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summaryImage%201.jpg)
-![Summary Image 2](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summaryImage%202.jpg)
-
 Paper Link: https://github.com/6859-sp21/final-project-social_mobility/blob/main/final/social%20mobility_paper.pdf
 
 Video teaser link: https://youtu.be/prDIlUe2fD8
@@ -22,3 +19,8 @@ For the development process, Christabel contributed to the map visualization. Zh
 
 ## Data Source
 [Income Segregation and Intergenerational Mobility Across Colleges in the United States, Opportuty Insights](https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing)
+
+## Summary Images
+![Summary Image 1](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summary1.jpg)
+![Summary Image 2](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summary2.jpg)
+![Summary Image 3](https://github.com/6859-sp21/final-project-social_mobility/blob/main/media/summary3.jpg)
