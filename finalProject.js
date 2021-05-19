@@ -3,8 +3,8 @@ const body = d3.select("body").node()
 var width  = window.innerWidth
 var height = window.innerHeight
 
-console.log(height)
-console.log(width)
+// console.log(height)
+// console.log(width)
 
 // var width = 900
 // var height = 600
@@ -266,7 +266,7 @@ function load(error, usStates, mobilityData) {
     let year = 1980
     let filteredData = mobilityData.filter( (x) => x.cohort == year)
 
-    console.log(filteredData)
+    // console.log(filteredData)
 
     generateMap(usStates, filteredData)
 

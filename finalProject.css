@@ -91,3 +91,11 @@ li.key {
 .card {
     height: fit-content;
 }
+
+.neighborhood-tip {
+    position: absolute;
+    background-color: #111;
+    display: flex;
+    font-family: sans-serif;
+    max-width: 500px;
+}
