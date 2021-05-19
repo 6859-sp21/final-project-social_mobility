@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="utf-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Load d3 -->
+    <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://d3js.org/d3-array.v2.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v2.min.js"></script> 
+    <!-- <script src="https://d3js.org/d3.v4.min.js"></script>   -->
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script src="https://unpkg.com/rbush@1.4.3/rbush.js"></script>
+    <script src="https://unpkg.com/spamjs@1.1.0/spam.min.js"></script>
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+
+    <script src="https://unpkg.com/d3-svg-legend@1.13.0/d3-legend.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js" integrity="sha512-wNH6xsp2n8CfB91nrBtfc4sfLwYPBMjSWVUwQOp60AYYXH6i8yCwuKFZ4rgK2i6pQek/b+bSyR7b01/922IBzQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <!-- Load Jquery UI css to style autocomplete correctly -->
+    <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+
+    <!-- Load bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    
+    <!-- Load AOS library for animation on scroll-->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="finalProject.css">
+       
+</head>
+
+<body>
+    
+    <header style="background-color: #f8feff;">
+        <div class = "section-body" style="padding-top: 200px; padding-bottom: 280px;">
+            <div class="row">
+                <div class="col-9">
+                    <h1 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="300">Social Mobility in the US</h1>
+                    <br>
+                    <br>
+                    <h5 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                        Everyone works hard for a chance at succeeding in this thing called life; or a chance to move out of poverty. 
+                        We sought answers to questions on matters of social mobility using anonymous data collated by professors at Harvard. 
+                        The data published by the <a href="https://opportunityinsights.org/data/?geographic_level=0&topic=0&paper_id=3084#resource-listing">Opportunity Insights Project</a>, 
+                        which contains intergenerational  income  mobility data from 2202 colleges and over 30 million college students from 1999-2013.
+
+                        <!-- Some of the questions our visualizations try to answer includ: 
+                        <ul> How does college education impact social mobility in the US? </ul>
+                        <ul> What are your chances of moving out of poverty? </ul>
+                        <ul> How do colleges affect this chance? </ul>
+                        <ul> How do the colleges affect the state social mobility? </ul>
+                        <ul> What about your parent's income? </ul>
+                        <ul> Or even your neighborhood and race? </ul> -->
+                    </h5>  
+                </div>
+
+                <div class="col-3">
+                </div>
+            </div>
+            
+        </div>
+    </header>
+
+    
+    <div class="page">
+        <div style="padding-left: 10%; padding-right: 30%; padding-top: 10%">
+            <h2 data-aos="fade-in" data-aos-delay="300"> Colleges and State Mobility</h2>
+            <br>
+            <h5 data-aos="fade-in" data-aos-delay="500" style="width: 50 ">
+                Mobility rate is defined as the percentage of students who come from a poor family and become a rich adult. 
+                Using college data, we investigate how each college's mobility rate feeds into the state mobility rate.
+                We map out all us states along with their state average to find out how each state compares with the other. 
+                <br>
+                <br>
+                Curious? Scroll down to interact with the map. 
+                Click on each state to find out what mobility looks like; along with to see if your university makes the top 10 list!
+            </h5>
+        </div>
+
+    </div>
+        
+    <div class='page'>
+        <div class="page-body" style="padding-left: 10%;" data-aos="fade-in" data-aos="fade-in" data-aos-delay="300">
+            <h2 data-aos="fade-in" data-aos-delay="300" >Social Mobility Rates by State</h2>
+            <br>
+            <div class='state-details'>
+                <div>
+                    <div id="state-legend"></div>
+                    <map>
+                    </map>
+                </div>
+                <tooltip>
+                    <stateTitle>
+                    </stateTitle>
+                    <stats>
+                    </stats>
+                    <!-- <stateMap>
+                    </stateMap> -->
+                    <br>
+                    <br>
+                    <collegeTable>
+                    </collegeTable>
+                </tooltip>
+            </div>  
+        </div>
+    </div>
+    <div class="page">
+        <div style="padding-left: 10%; padding-right: 30%">
+            <h2 data-aos="fade-in" data-aos-delay="300"> Neighborhood Data: Individual Income vs Race & Parent Income </h2>
+            <br>
+            <h5 data-aos="fade-in" data-aos-delay="500" style="width: 50 ">
+                Using neighborhood data, we investigate how an individual income(excluding spouse income) changes given their race and their parent's income. 
+                High income is defined as 75th percentile incomes of all incomes, while medium income 50th percentile and low income 25th percentile. </p>
+                <br>
+                Curious? Go scroll down to interact with the map. 
+                Toggle the filters on the right to find out how race and parent income affect child mobility on a neighborhood level!
+            </h5>
+        </div>
+
+    </div>
+
+    <script src="finalProject.js"></script>
+    
+
+    <div class='page'>
+        <div class='page-body neighborhood-details' style="padding-left: 10%;">
+            <div data-aos="fade-in" data-aos-delay="300" class='neighborhood-map-holder'>
+                <div id="legend"></div>
+                <neighborhood_map>
+
+                </neighborhood_map>
+                <!-- <div class='neighborhood-tip'>
+
+                </div> -->
+            </div>
+            
+            <div data-aos="fade-in" data-aos-delay="300"  class="card">
+                <h5 class="card-header">Individual Income(Excluding spouse) at 35</h5>
+            
+                <div class="card-body">
+                    <div > 
+                        <form>
+                            PARENT INCOME 
+                        
+                            <div class="form-check">
+                                <input class="form-check-input all-income" type="radio" name="flexRadioDefault" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                All 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input high" type="radio" name="flexRadioDefault">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                High
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input medium" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Medium
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input low" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Low
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                    <br>
+
+                    <div class='child-race'>
+                        <form>
+                            CHILD RACE
+                            <div class="form-check">
+                                <input class="form-check-input all-race" type="radio" name="flexRadioDefault" checked>
+                                <label class="form-check-label" for="flexRadioDefault1">
+                                All 
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input white" type="radio" name="flexRadioDefault">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                White
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input hispanic" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Hispanic
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input black" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Black
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input asian" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                Asian
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input american-indian" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
+                                <label class="form-check-label" for="flexRadioDefault2">
+                                American Indian
+                                </label>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+<div class="container-fluid" id="section3" style="background-color: #f8feff; padding-top: 6rem; padding-bottom: 3rem;">
+    <div class="section-body">
+        <div class="row" style="padding-bottom: 3rem;">
+            <h2 data-aos="fade-in" data-aos-duration="1000" data-aos-delay="100" >Social Mobility by College</h2> 
+        </div>   
+
+        <div class="row">
+            <div class="col-6">
+                <!-- College Name Search -->
+                <div class="row" data-aos="fade-in" data-aos-delay="300" >
+                    <div class="col">
+                        <div class="input-group">
+                            <input type="text" id="collegeSearch" class="form-control" placeholder="Search College" aria-label="Search College">
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <button type="button" class="btn btn-outline-primary" id='search'>Search</button> 
+                        <button type="button" class="btn btn-outline-primary" id='show'style="display:none">Show Actual</button>
+                        <button type="button" class="btn btn-outline-dark" id='clear' style="display:none">Clear</button> 
+                    </div>
+                </div>
+
+                <br>
+                <div id="scatterChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- Parent and Kid Median Income Scatter Plot -->
+                </div>
+                <br>
+                <P data-aos="fade-in" data-aos-delay="600">This chart compares family income and student income broken down by college. Each dot represents a college and the color cooresponds to its tier. 
+                    You can search for a college or click on the graph to see a specific college tier cluster.</P>
+            </div>
+
+            <div class="col-1">
+            </div>
+            
+            <!-- People chart -->
+            <div class="col-5">
+                <h3 data-aos="fade-in" data-aos-delay="300">Family income VS. student income at age 34</h3>
+                <br>
+                <h4 id="collegeName" data-aos="fade-in" data-aos-delay="300">All Colleges</h4>
+                <h5 id="scatterText" data-aos="fade-in" data-aos-delay="300"></h5>
+                <div style="padding-top: 20px;" id="peopleChart" data-aos="fade-in" data-aos-duration="1000" data-aos-delay="600">
+                    <!-- People chart -->
+                </div>
+                <br>
+                <h5 id="peopleText" data-aos="fade-in" data-aos-delay="800"></h5>            
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+    <script src="neighborhood.js"></script>
+
+    <!-- Load JQuery UI from Google's server to increase speed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- Bootstrap Javascript -->
+    <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    
+    <!-- Load AOS Animation on Scroll library and initialize it -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+
+    <!-- Visulization -->
+    <script src="scatterplot.js"> </script>
+
+</body>
+</html>
