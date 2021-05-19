@@ -5,14 +5,15 @@ body {
     /* font-size: 16px; */
     /* padding: 40px; */
 }
-.page {
+
+/* .page {
     height: 100vh;
 }
 
 .page-body{
     display: grid;
     grid-template-columns: 60% 40%;
-}
+} */
 
 .section-body{
     padding-left: 80px;
